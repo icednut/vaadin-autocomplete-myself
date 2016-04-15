@@ -4,24 +4,24 @@ import java.io.Serializable;
 
 @SuppressWarnings("serial")
 public class AutocompleteFieldSuggestion implements Serializable {
-  
-  private Integer id;
-  private String displayString;
 
-  public String getDisplayString() {
-    return displayString;
-  }
+    private Integer id;
+    private String displayString;
 
-  public Integer getId() {
-    return id;
-  }
+    public String getDisplayString() {
+        return displayString;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public Integer getId() {
+        return id;
+    }
 
-  public void setDisplayString(String displayString) {
-    this.displayString = displayString;
-  }
-  
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setDisplayString(String displayString) {
+        this.displayString = displayString;
+    }
+
 }

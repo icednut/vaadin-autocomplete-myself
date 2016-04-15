@@ -4,5 +4,7 @@ import com.vaadin.shared.annotations.Delayed;
 import com.vaadin.shared.communication.ClientRpc;
 
 public interface AutocompleteClientRpc extends ClientRpc {
-  @Delayed public void setText(String text);
+
+    @Delayed
+    public void setText(String text);
 }
