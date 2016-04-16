@@ -58,7 +58,7 @@ public class DemoUI extends UI {
 
     private void handleSearchQuery(AutocompleteField<Integer> field, String query) {
         for (int i = 0; i < 10; i++) {
-            field.addSuggestion(i, i + ": " + query);
+            field.addSuggestion(i, i + ": " + query, "hello", "world");
         }
     }
 

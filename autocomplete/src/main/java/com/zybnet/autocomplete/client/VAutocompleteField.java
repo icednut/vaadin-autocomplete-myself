@@ -24,7 +24,7 @@ public class VAutocompleteField extends Composite implements KeyUpHandler {
     public static final String CLASSNAME = "v-autocomplete";
 
     private final SuggestOracle oracle;
-    private final SimpleSuggestionsDisplay suggestionsDisplay;
+    private final SuggestBox.DefaultSuggestionDisplay suggestionsDisplay;
     private final VTextField textField;
     private final SuggestBox suggestBox;
 
@@ -39,7 +39,8 @@ public class VAutocompleteField extends Composite implements KeyUpHandler {
 
     public VAutocompleteField() {
         oracle = new SuggestOracleImpl();
-        suggestionsDisplay = new SimpleSuggestionsDisplay(this);
+        suggestionsDisplay = new SuggestBox.DefaultSuggestionDisplay();
+        suggestionsDisplay.setPositionRelativeTo(this);
         textField = GWT.create(VTextField.class);
         suggestBox = new SuggestBox(oracle, textField, suggestionsDisplay);
         initWidget(suggestBox);
@@ -69,6 +70,11 @@ public class VAutocompleteField extends Composite implements KeyUpHandler {
                 }
             }
         }
+
+        @Override
+        public boolean isDisplayStringHTML() {
+            return true;
+        }
     }
 
     private void scheduleQuery(final String query) {
@@ -92,6 +98,7 @@ public class VAutocompleteField extends Composite implements KeyUpHandler {
 
     private List<SuggestOracle.Suggestion> wrapSuggestions(List<AutocompleteFieldSuggestion> in) {
         List<SuggestOracle.Suggestion> out = new ArrayList<SuggestOracle.Suggestion>();
+
         for (final AutocompleteFieldSuggestion wrappedSuggestion : in) {
             out.add(new OracleSuggestionImpl(wrappedSuggestion));
         }
@@ -102,7 +109,7 @@ public class VAutocompleteField extends Composite implements KeyUpHandler {
     public void setSuggestions(List<AutocompleteFieldSuggestion> suggestions) {
         isInitiatedFromServer = true;
         this.suggestions = Collections.unmodifiableList(suggestions);
-        suggestBox.refreshSuggestionList();
+        //        suggestBox.refreshSuggestionList();
         suggestBox.showSuggestionList();
         isInitiatedFromServer = false;
     }
