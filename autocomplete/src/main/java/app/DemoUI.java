@@ -15,10 +15,10 @@ import javax.servlet.annotation.WebServlet;
 
 @Theme("valo")
 @SuppressWarnings("serial")
-public class DevUI extends UI {
+public class DemoUI extends UI {
 
     @WebServlet(value = "/*", asyncSupported = true)
-    @VaadinServletConfiguration(productionMode = false, ui = DevUI.class, widgetset = "com.zybnet.autocomplete.AutocompleteWidgetSet")
+    @VaadinServletConfiguration(productionMode = false, ui = DemoUI.class, widgetset = "com.zybnet.autocomplete.AutocompleteWidgetSet")
     public static class DevServlet extends VaadinServlet {
     }
 
@@ -26,18 +26,17 @@ public class DevUI extends UI {
 
     @Override
     protected void init(VaadinRequest request) {
-        VerticalLayout layout = new VerticalLayout() {{
-            setMargin(true);
-            setWidth("800px");
-            setHeight("500px");
-            addComponents(search1);
-        }};
+        setupAutocomplete(search1);
+        search1.setWidth(300, Unit.PIXELS);
 
-        setUpAutocomplete(search1);
-        setContent(layout);
+        setContent(new VerticalLayout() {{
+            setMargin(true);
+            setSizeFull();
+            addComponents(search1);
+        }});
     }
 
-    private void setUpAutocomplete(AutocompleteField<Integer> search) {
+    private void setupAutocomplete(AutocompleteField<Integer> search) {
         search.setQueryListener(new AutocompleteQueryListener<Integer>() {
             @Override
             public void handleUserQuery(AutocompleteField<Integer> field, String query) {
