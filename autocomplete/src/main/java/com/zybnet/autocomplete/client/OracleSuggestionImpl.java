@@ -10,7 +10,7 @@ public class OracleSuggestionImpl implements Suggestion {
 
     public OracleSuggestionImpl(AutocompleteFieldSuggestion wrappedSuggestion) {
         this.wrappedSuggestion = wrappedSuggestion;
-        this.displayString = wrappedSuggestion.getDisplayString();
+        this.displayString = wrappedSuggestion.getCaption();
     }
 
     @Override

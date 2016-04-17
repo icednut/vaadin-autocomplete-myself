@@ -1,4 +1,40 @@
-.gwt-SuggestBoxPopup {
-  border: 2px solid #D5E2FF;
-  background: white;
+.extendComboBoxPopup {
+  padding: 4px 4px;
+  border-radius: 4px;
+  background-color: white;
+  color: #474747;
+  -webkit-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.09098);
+  box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.1), 0 3px 5px 0 rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.09098);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  margin-top: 5px;
+}
+
+.extendComboBoxPopup table, .extendComboBoxPopup tbody, .extendComboBoxPopup tr, .extendComboBoxPopup td {
+  display: block;
+}
+
+.extendComboBoxPopup .popupContent .gwt-MenuItem {
+  cursor: pointer;
+  line-height: 27px;
+  padding: 0 20px 0 10px;
+  border-radius: 3px;
+  font-weight: 400;
+  white-space: nowrap;
+  position: relative;
+}
+
+.extendComboBoxPopup .popupContent .gwt-MenuItem-selected {
+  background-color: #197de1;
+  background-image: -webkit-linear-gradient(top, #1b87e3 2%, #166ed5 98%);
+  background-image: linear-gradient(to bottom,#1b87e3 2%, #166ed5 98%);
+  color: #ecf2f8;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.05);
 }

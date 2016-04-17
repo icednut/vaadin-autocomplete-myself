@@ -12,6 +12,7 @@ import java.util.*;
 public class AutocompleteField<E> extends AbstractField<String> implements AutocompleteServerRpc {
 
     private String text;
+    private String itemCaptionTemplate;
     private AutocompleteQueryListener<E> queryListener;
     private AutocompleteSuggestionPickedListener<E> suggestionPickedListener;
     private Map<Integer, E> items = new HashMap<Integer, E>();
@@ -49,7 +50,7 @@ public class AutocompleteField<E> extends AbstractField<String> implements Autoc
 
     @Override
     public void onSuggestionPicked(AutocompleteFieldSuggestion suggestion) {
-        setText(suggestion.getDisplayString());
+        setText(suggestion.getValue());
 
         if (suggestionPickedListener != null) {
             suggestionPickedListener.onSuggestionPicked(items.get(suggestion.getId()));
@@ -88,16 +89,8 @@ public class AutocompleteField<E> extends AbstractField<String> implements Autoc
         AutocompleteFieldSuggestion suggestion = new AutocompleteFieldSuggestion();
 
         suggestion.setId(index);
-
-        String displayString = "<h3>" + title + "</h3>";
-
-        if (captions != null) {
-            for (String caption : captions) {
-                displayString += "<p>" + caption + "</p>";
-            }
-        }
-
-        suggestion.setDisplayString(displayString);
+        suggestion.setValue(title);
+        suggestion.setCaption(String.format(itemCaptionTemplate, title, captions[0], captions[1]));
         newSuggestionList.add(suggestion);
         getState().suggestions = newSuggestionList;
     }
@@ -108,5 +101,9 @@ public class AutocompleteField<E> extends AbstractField<String> implements Autoc
 
     public void setTrimQuery(boolean trimQuery) {
         getState().trimQuery = trimQuery;
+    }
+
+    public void setItemCaptionTemplate(String itemCaptionTemplate) {
+        this.itemCaptionTemplate = itemCaptionTemplate;
     }
 }

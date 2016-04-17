@@ -7,9 +7,8 @@ import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.SelectionHandler;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.CustomSuggestionsDisplay;
 import com.google.gwt.user.client.ui.SuggestBox;
-import com.google.gwt.user.client.ui.SuggestBox.DefaultSuggestionDisplay;
-import com.google.gwt.user.client.ui.SuggestBox.SuggestionDisplay;
 import com.google.gwt.user.client.ui.SuggestOracle;
 import com.google.gwt.user.client.ui.SuggestOracle.Suggestion;
 import com.vaadin.client.ui.VTextField;
@@ -20,11 +19,14 @@ import java.util.Collections;
 import java.util.List;
 
 public class VAutocompleteField extends Composite implements KeyUpHandler {
+    //public class VAutocompleteField extends Composite {
 
     public static final String CLASSNAME = "v-autocomplete";
 
     private final SuggestOracle oracle;
-    private final SuggestBox.DefaultSuggestionDisplay suggestionsDisplay;
+    private final CustomSuggestionsDisplay suggestionsDisplay;
+    //    private final SimpleSuggestionsDisplay suggestionsDisplay;
+    //    private final SuggestBox.DefaultSuggestionDisplay suggestionsDisplay;
     private final VTextField textField;
     private final SuggestBox suggestBox;
 
@@ -39,9 +41,9 @@ public class VAutocompleteField extends Composite implements KeyUpHandler {
 
     public VAutocompleteField() {
         oracle = new SuggestOracleImpl();
-        suggestionsDisplay = new SuggestBox.DefaultSuggestionDisplay();
-        suggestionsDisplay.setPositionRelativeTo(this);
         textField = GWT.create(VTextField.class);
+        suggestionsDisplay = new CustomSuggestionsDisplay();
+        suggestionsDisplay.setPositionRelativeTo(this);
         suggestBox = new SuggestBox(oracle, textField, suggestionsDisplay);
         initWidget(suggestBox);
         suggestBox.getValueBox().addKeyUpHandler(this);
@@ -109,7 +111,6 @@ public class VAutocompleteField extends Composite implements KeyUpHandler {
     public void setSuggestions(List<AutocompleteFieldSuggestion> suggestions) {
         isInitiatedFromServer = true;
         this.suggestions = Collections.unmodifiableList(suggestions);
-        //        suggestBox.refreshSuggestionList();
         suggestBox.showSuggestionList();
         isInitiatedFromServer = false;
     }
@@ -153,11 +154,14 @@ public class VAutocompleteField extends Composite implements KeyUpHandler {
             textChangeHandler.onTextChange(suggestBox.getText());
 
         switch (event.getNativeKeyCode()) {
+            case KeyCodes.KEY_DOWN:
+                suggestBox.showSuggestionList();
+                break;
             case KeyCodes.KEY_ESCAPE:
             case KeyCodes.KEY_TAB:
-                SuggestionDisplay display = suggestBox.getSuggestionDisplay();
-                if (display instanceof DefaultSuggestionDisplay) {
-                    ((DefaultSuggestionDisplay) display).hideSuggestions();
+                SuggestBox.SuggestionDisplay display = suggestBox.getSuggestionDisplay();
+                if (display instanceof SuggestBox.DefaultSuggestionDisplay) {
+                    ((SuggestBox.DefaultSuggestionDisplay) display).hideSuggestions();
                 }
                 event.stopPropagation();
                 break;
