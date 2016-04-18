@@ -1,5 +1,6 @@
 package com.zybnet.autocomplete.server;
 
+import com.vaadin.data.Container;
 import com.vaadin.ui.AbstractField;
 import com.zybnet.autocomplete.shared.AutocompleteClientRpc;
 import com.zybnet.autocomplete.shared.AutocompleteFieldSuggestion;
@@ -16,6 +17,7 @@ public class AutocompleteField<E> extends AbstractField<String> implements Autoc
     private AutocompleteQueryListener<E> queryListener;
     private AutocompleteSuggestionPickedListener<E> suggestionPickedListener;
     private Map<Integer, E> items = new HashMap<Integer, E>();
+//    protected Container items;
 
     public AutocompleteField() {
         registerRpc(this, AutocompleteServerRpc.class);

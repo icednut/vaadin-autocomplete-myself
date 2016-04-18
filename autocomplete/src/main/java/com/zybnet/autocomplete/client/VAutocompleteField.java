@@ -19,14 +19,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class VAutocompleteField extends Composite implements KeyUpHandler {
-    //public class VAutocompleteField extends Composite {
 
     public static final String CLASSNAME = "v-autocomplete";
 
     private final SuggestOracle oracle;
     private final CustomSuggestionsDisplay suggestionsDisplay;
-    //    private final SimpleSuggestionsDisplay suggestionsDisplay;
-    //    private final SuggestBox.DefaultSuggestionDisplay suggestionsDisplay;
     private final VTextField textField;
     private final SuggestBox suggestBox;
 

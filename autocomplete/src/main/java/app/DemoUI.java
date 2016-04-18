@@ -43,7 +43,7 @@ public class DemoUI extends UI {
             setMargin(true);
             setSpacing(true);
         }};
-        comboBoxLayout.addComponents(new Label("ComboBox"), comboBox);
+        comboBoxLayout.addComponents(new Label("com.vaadin.ui.ComboBox"), comboBox);
 
         VerticalLayout content = new VerticalLayout() {{
             setSpacing(true);
@@ -72,7 +72,7 @@ public class DemoUI extends UI {
     private AutocompleteField<Member> createAutoCompleteField(final Member sam, final Member tom, final Member mike) {
         AutocompleteField<Member> autoCompleteField = new AutocompleteField<Member>();
 
-        autoCompleteField.setItemCaptionTemplate("<div style=\"min-width:300px\"><h3>%s</h3><p>%s %s</p></div>");
+        autoCompleteField.setItemCaptionTemplate("<div style=\"min-width:300px\"><h3>%s</h3><p>나이: %s, 이름: %s</p></div>");
         autoCompleteField.setQueryListener(new AutocompleteQueryListener<Member>() {
             @Override
             public void handleUserQuery(AutocompleteField<Member> field, String query) {
